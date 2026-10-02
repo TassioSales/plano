@@ -1,0 +1,9 @@
+email-sem-indice|SELECT * FROM clientes WHERE email = 'cliente123456@exemplo.com.br'
+funcao-na-coluna|SELECT id, nome FROM clientes WHERE lower(email) = 'cliente4242@exemplo.com.br'
+juncao-sem-indice|SELECT p.id, p.total, i.produto_id, i.quantidade FROM pedidos p JOIN itens_pedido i ON i.pedido_id = p.id WHERE p.cliente_id = 4242
+ordenacao-em-disco|SELECT id, cliente_id, total FROM pedidos ORDER BY total DESC
+estimativa-errada|SELECT c.nome, p.total FROM clientes c JOIN pedidos p ON p.cliente_id = c.id WHERE c.cidade = 'Rio Branco' AND c.uf = 'AC' AND p.status = 'cancelado'
+subconsulta-repetida|SELECT c.id, c.nome, (SELECT count(*) FROM pedidos p WHERE p.cliente_id = c.id) AS pedidos FROM clientes c WHERE c.uf = 'AC' LIMIT 40
+periodo-e-status|SELECT * FROM pedidos WHERE criado_em >= '2025-01-01' AND criado_em < '2025-01-08' AND status = 'pago'
+agregacao-paralela|SELECT pr.categoria, sum(i.quantidade * i.preco_unit) AS receita FROM itens_pedido i JOIN produtos pr ON pr.id = i.produto_id GROUP BY pr.categoria ORDER BY receita DESC
+saudavel|SELECT * FROM pedidos WHERE id = 31337

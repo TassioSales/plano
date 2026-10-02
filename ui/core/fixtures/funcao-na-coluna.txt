@@ -1,0 +1,12 @@
+Gather  (cost=1000.00..5346.71 rows=1000 width=18) (actual time=42.585..44.959 rows=1 loops=1)
+  Workers Planned: 1
+  Workers Launched: 1
+  Buffers: shared hit=2482
+  ->  Parallel Seq Scan on clientes  (cost=0.00..4246.71 rows=588 width=18) (actual time=27.824..40.195 rows=0 loops=2)
+        Filter: (lower(email) = 'cliente4242@exemplo.com.br'::text)
+        Rows Removed by Filter: 100000
+        Buffers: shared hit=2482
+Planning:
+  Buffers: shared hit=63
+Planning Time: 0.435 ms
+Execution Time: 45.011 ms

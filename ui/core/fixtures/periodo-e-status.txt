@@ -1,0 +1,12 @@
+Gather  (cost=1000.00..15913.57 rows=1959 width=29) (actual time=0.380..35.970 rows=2108 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=610 read=6816
+  ->  Parallel Seq Scan on pedidos  (cost=0.00..14717.67 rows=816 width=29) (actual time=0.104..29.930 rows=703 loops=3)
+        Filter: ((criado_em >= '2025-01-01 00:00:00+00'::timestamp with time zone) AND (criado_em < '2025-01-08 00:00:00+00'::timestamp with time zone) AND (status = 'pago'::text))
+        Rows Removed by Filter: 332631
+        Buffers: shared hit=610 read=6816
+Planning:
+  Buffers: shared hit=80
+Planning Time: 0.715 ms
+Execution Time: 36.158 ms

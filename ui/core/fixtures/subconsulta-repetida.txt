@@ -1,0 +1,21 @@
+Limit  (cost=0.00..797075.08 rows=40 width=26) (actual time=130.003..1888.892 rows=40 loops=1)
+  Buffers: shared hit=21689 read=277760
+  ->  Seq Scan on clientes c  (cost=0.00..116512450.17 rows=5847 width=26) (actual time=51.343..1810.185 rows=40 loops=1)
+        Filter: (uf = 'AC'::bpchar)
+        Rows Removed by Filter: 194000
+        Buffers: shared hit=21689 read=277760
+        SubPlan 1
+          ->  Aggregate  (cost=19926.01..19926.02 rows=1 width=8) (actual time=44.946..44.946 rows=1 loops=40)
+                Buffers: shared hit=19280 read=277760
+                ->  Seq Scan on pedidos p  (cost=0.00..19926.00 rows=6 width=0) (actual time=6.841..44.927 rows=5 loops=40)
+                      Filter: (cliente_id = c.id)
+                      Rows Removed by Filter: 999995
+                      Buffers: shared hit=19280 read=277760
+Planning:
+  Buffers: shared hit=91
+Planning Time: 0.652 ms
+JIT:
+  Functions: 11
+  Options: Inlining true, Optimization true, Expressions true, Deforming true
+  Timing: Generation 0.433 ms (Deform 0.167 ms), Inlining 41.553 ms, Optimization 19.285 ms, Emission 17.896 ms, Total 79.166 ms
+Execution Time: 1905.430 ms

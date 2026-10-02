@@ -1,0 +1,8 @@
+Seq Scan on clientes  (cost=0.00..4982.00 rows=1 width=68) (actual time=13.776..15.264 rows=1 loops=1)
+  Filter: (email = 'cliente123456@exemplo.com.br'::text)
+  Rows Removed by Filter: 199999
+  Buffers: shared hit=2482
+Planning:
+  Buffers: shared hit=75
+Planning Time: 0.519 ms
+Execution Time: 15.343 ms

@@ -1,0 +1,22 @@
+Gather  (cost=5247.97..17949.08 rows=48 width=20) (actual time=10.604..42.758 rows=1731 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=3030 read=7072
+  ->  Parallel Hash Join  (cost=4247.97..16944.28 rows=20 width=20) (actual time=8.029..37.090 rows=577 loops=3)
+        Hash Cond: (p.cliente_id = c.id)
+        Buffers: shared hit=3030 read=7072
+        ->  Parallel Seq Scan on pedidos p  (cost=0.00..12634.33 rows=23611 width=10) (actual time=0.086..26.762 rows=18636 loops=3)
+              Filter: (status = 'cancelado'::text)
+              Rows Removed by Filter: 314698
+              Buffers: shared hit=354 read=7072
+        ->  Parallel Hash  (cost=4246.71..4246.71 rows=101 width=18) (actual time=7.270..7.271 rows=2000 loops=3)
+              Buckets: 8192 (originally 1024)  Batches: 1 (originally 1)  Memory Usage: 504kB
+              Buffers: shared hit=2482
+              ->  Parallel Seq Scan on clientes c  (cost=0.00..4246.71 rows=101 width=18) (actual time=5.573..5.902 rows=2000 loops=3)
+                    Filter: ((cidade = 'Rio Branco'::text) AND (uf = 'AC'::bpchar))
+                    Rows Removed by Filter: 64667
+                    Buffers: shared hit=2482
+Planning:
+  Buffers: shared hit=205
+Planning Time: 1.348 ms
+Execution Time: 42.943 ms

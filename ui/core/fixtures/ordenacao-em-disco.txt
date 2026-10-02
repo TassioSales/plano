@@ -1,0 +1,14 @@
+Sort  (cost=134174.34..136674.34 rows=1000000 width=14) (actual time=481.730..774.433 rows=1000000 loops=1)
+  Sort Key: total DESC
+  Sort Method: external merge  Disk: 24544kB
+  Buffers: shared hit=229 read=7200, temp read=3068 written=3082
+  ->  Seq Scan on pedidos  (cost=0.00..17426.00 rows=1000000 width=14) (actual time=2.978..100.973 rows=1000000 loops=1)
+        Buffers: shared hit=226 read=7200
+Planning:
+  Buffers: shared hit=76
+Planning Time: 0.499 ms
+JIT:
+  Functions: 2
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.148 ms (Deform 0.088 ms), Inlining 0.000 ms, Optimization 0.201 ms, Emission 2.747 ms, Total 3.096 ms
+Execution Time: 826.974 ms

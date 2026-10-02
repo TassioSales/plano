@@ -1,0 +1,20 @@
+Gather  (cost=13634.36..36895.40 rows=12 width=18) (actual time=85.028..141.747 rows=3 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=388 read=19971
+  ->  Parallel Hash Join  (cost=12634.36..35894.20 rows=5 width=18) (actual time=70.527..136.646 rows=1 loops=3)
+        Hash Cond: (i.pedido_id = p.id)
+        Buffers: shared hit=388 read=19971
+        ->  Parallel Seq Scan on itens_pedido i  (cost=0.00..21072.33 rows=833333 width=12) (actual time=0.036..53.794 rows=666667 loops=3)
+              Buffers: shared hit=96 read=12643
+        ->  Parallel Hash  (cost=12634.33..12634.33 rows=2 width=10) (actual time=21.363..21.364 rows=0 loops=3)
+              Buckets: 1024  Batches: 1  Memory Usage: 40kB
+              Buffers: shared hit=98 read=7328
+              ->  Parallel Seq Scan on pedidos p  (cost=0.00..12634.33 rows=2 width=10) (actual time=17.071..21.261 rows=0 loops=3)
+                    Filter: (cliente_id = 4242)
+                    Rows Removed by Filter: 333333
+                    Buffers: shared hit=98 read=7328
+Planning:
+  Buffers: shared hit=188
+Planning Time: 1.204 ms
+Execution Time: 141.927 ms

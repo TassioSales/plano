@@ -1,0 +1,25 @@
+# Banco de demonstração do plano: uma loja com problemas de propósito
+# (faltam índices, há colunas correlacionadas). Porta 54330.
+# O script em db/ roda só na primeira vez, quando o volume é criado.
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: plano-postgres
+    environment:
+      POSTGRES_USER: plano
+      POSTGRES_PASSWORD: plano
+      POSTGRES_DB: loja
+    ports:
+      - "127.0.0.1:54330:5432"
+    volumes:
+      - plano-pgdata:/var/lib/postgresql/data
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/seed.sql:ro
+    healthcheck:
+      # só fica saudável depois que o seed terminou
+      test: ["CMD-SHELL", "psql -U plano -d loja -tAc \"SELECT 1 FROM seed_pronto\" | grep -q 1"]
+      interval: 3s
+      timeout: 5s
+      retries: 60
+
+volumes:
+  plano-pgdata:
